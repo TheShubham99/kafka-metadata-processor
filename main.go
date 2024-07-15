@@ -1,9 +1,9 @@
 package main
 
 import (
-	"atlan-lily/consumer"
-	"atlan-lily/producer"
-	"atlan-lily/server"
+	"data-app/consumer"
+	"data-app/producer"
+	"data-app/server"
 	"log"
 	"os"
 	"os/signal"

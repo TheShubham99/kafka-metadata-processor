@@ -1,4 +1,4 @@
-module atlan-lily
+module data-app
 
 go 1.17
 

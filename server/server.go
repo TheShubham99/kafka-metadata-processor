@@ -1,7 +1,7 @@
 package server
 
 import (
-	"atlan-lily/producer"
+	"data-app/producer"
 	"fmt"
 	"log"
 	"net/http"
@@ -13,7 +13,7 @@ func GetMetadata(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
 	message := vars["message"]
-	fmt.Fprintf(w, "Metadata for ID: %s\n", id)
+	fmt.Fprintf(w, "Ingested Metadata for ID: %s\n", id)
 
 	if err := producer.Produce("metadata_topic", map[string]interface{}{id: message}); err != nil {
 		log.Fatalf("Failed to produce message: %v", err)
@@ -22,7 +22,7 @@ func GetMetadata(w http.ResponseWriter, r *http.Request) {
 
 func StartServer() {
 	r := mux.NewRouter()
-	r.HandleFunc("/metadata/{id}/{message}", GetMetadata).Methods("GET")
+	r.HandleFunc("/metadata/{id}/{message}", GetMetadata).Methods("GET") // TODO: Make this a post as submiting should ideally be post
 
 	// Handle the HTTP server
 	srv := &http.Server{
